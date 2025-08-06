@@ -1,0 +1,51 @@
+table Columns
+	lineageTag: 806b13b1-d7bd-431e-bb4e-258363b8701f
+
+	column Columns
+		lineageTag: cfea8734-7493-4c76-a53c-872e9d96d213
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Columns Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Columns Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Columns Fields'
+		isHidden
+		lineageTag: 7a84b7f7-165a-454f-b203-12e7963afe6b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Columns Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Columns Order'
+		isHidden
+		formatString: 0
+		lineageTag: fb0b74b6-8dab-456c-8445-2e6601b29900
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Columns = calculated
+		mode: import
+		source =
+				{
+				    ("Category", NAMEOF('sales2'[Category]), 0),
+				    ("City", NAMEOF('sales2'[City]), 1),
+				    ("ShipDate", NAMEOF('sales2'[ShipDate]), 2),
+				    ("Segment", NAMEOF('sales2'[Segment]), 3),
+				    ("SalesPerson", NAMEOF('sample_sales_salesperson_'[SalesPerson]), 4)
+				}
+
+	annotation PBI_Id = cc30f3c9a24f40a58e9437e53efe8043
+

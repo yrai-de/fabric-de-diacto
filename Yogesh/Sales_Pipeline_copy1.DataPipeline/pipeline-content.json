@@ -1,0 +1,182 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "fabric_de_series_004_source",
+                  "fileName": "sales.csv"
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "meriton_usecase",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "13a29f17-2137-9c71-49ab-c5f010345ba3",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "table": "raw.sales"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "meriton_usecase",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "13a29f17-2137-9c71-49ab-c5f010345ba3",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "SOLDTOSALESDISTRICTNAME",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SOLDTOSALESDISTRICTNAME",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SOLDTOSALESEMPLOYEENAME",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SOLDTOSALESEMPLOYEENAME",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CUSTOMERTIER",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "CUSTOMERTIER",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SOLDTOPARTY",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SOLDTOPARTY",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SOLDTOPARTYNAME",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SOLDTOPARTYNAME",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "COMPANY",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "COMPANY",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SALES_ACTUAL",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "SALES_ACTUAL",
+                  "physicalType": "float"
+                }
+              },
+              {
+                "source": {
+                  "name": "MONTHYEAR",
+                  "type": "String",
+                  "physicalType": "String"
+                },
+                "sink": {
+                  "name": "MONTHYEAR",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy Data sales data",
+        "dependsOn": []
+      }
+    ]
+  }
+}

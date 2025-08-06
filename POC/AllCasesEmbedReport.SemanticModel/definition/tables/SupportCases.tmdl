@@ -1,0 +1,406 @@
+table SupportCases
+	lineageTag: 3fcd7ba4-1030-4b5a-8f78-d66a74fc328b
+
+	column DoNotModifyCase
+		dataType: string
+		lineageTag: 50c2e8ce-9359-4c8b-8d85-c1a59fb50291
+		summarizeBy: none
+		sourceColumn: DoNotModifyCase
+
+		annotation SummarizationSetBy = Automatic
+
+	column DoNotModifyRowChecksum
+		dataType: string
+		lineageTag: 4483df9d-6a46-45f4-93eb-24bdf16794de
+		summarizeBy: none
+		sourceColumn: DoNotModifyRowChecksum
+
+		annotation SummarizationSetBy = Automatic
+
+	column DoNotModifyModifiedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1e0c2dae-a52c-42c0-9efb-e4ed73824d78
+		summarizeBy: none
+		sourceColumn: DoNotModifyModifiedOn
+
+		variation Variation
+			isDefault
+			relationship: 9580eae2-f358-49a9-9d6b-e70a9900e9c3
+			defaultHierarchy: LocalDateTable_42925a8b-de39-40fd-9237-00d1efc45cd6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 20a13f2a-7a98-4dbb-9441-f0d48760cc3e
+		summarizeBy: none
+		sourceColumn: CreatedOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseTitle
+		dataType: string
+		lineageTag: 4f1ab118-fb25-4945-856f-4d014e63652f
+		summarizeBy: none
+		sourceColumn: CaseTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseNumber
+		dataType: string
+		lineageTag: fd7075c4-af86-44c5-b9e2-81fc0110268c
+		summarizeBy: none
+		sourceColumn: CaseNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Priority
+		dataType: string
+		lineageTag: 0b93d0fa-8254-4770-bd98-4e844a0afab6
+		summarizeBy: none
+		sourceColumn: Priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origin
+		dataType: string
+		lineageTag: 4ea93776-da4a-4032-8aab-f16cfaef36aa
+		summarizeBy: none
+		sourceColumn: Origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column PortfolioCompany
+		dataType: string
+		lineageTag: 97c1d60f-a328-4e79-8bea-daa25d104fa9
+		summarizeBy: none
+		sourceColumn: PortfolioCompany
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: cedac2f9-3dd5-454b-957d-3e50361cfc45
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupportRep
+		dataType: string
+		lineageTag: 44e31a35-f6f9-4a9a-8455-365df1185a9c
+		summarizeBy: none
+		sourceColumn: SupportRep
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 0741582d-e0cf-4cd4-b14a-47c37071ce88
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseAge
+		dataType: int64
+		formatString: 0
+		lineageTag: ab2a3ebd-9be0-4ba3-96d7-d2ba5ef39721
+		summarizeBy: sum
+		sourceColumn: CaseAge
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseStatus
+		dataType: string
+		lineageTag: fc137d1d-ecb5-4f5c-91f7-63296c1afae1
+		summarizeBy: none
+		sourceColumn: CaseStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseStage
+		dataType: string
+		lineageTag: c098099f-ed70-4388-be2a-b87325481593
+		summarizeBy: none
+		sourceColumn: CaseStage
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseType
+		dataType: string
+		lineageTag: 4d582953-5d9c-4b3e-98b6-d760dd9050ff
+		summarizeBy: none
+		sourceColumn: CaseType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosingComments
+		dataType: string
+		lineageTag: 9756694f-13da-4177-83a8-a45789bfb3ae
+		summarizeBy: none
+		sourceColumn: ClosingComments
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosingReason
+		dataType: string
+		lineageTag: 4cb8005d-711d-4595-b1d6-005d2d220e85
+		summarizeBy: none
+		sourceColumn: ClosingReason
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contact
+		dataType: string
+		lineageTag: 51fcd63c-0f46-41f5-9a5b-4cfeccf65687
+		summarizeBy: none
+		sourceColumn: Contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeactivatedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 346f95f2-fd7b-4209-b345-3dfe5d42ee1d
+		summarizeBy: none
+		sourceColumn: DeactivatedOn
+
+		variation Variation
+			isDefault
+			relationship: 69689054-8430-4c74-9b46-5bb610958fc5
+			defaultHierarchy: LocalDateTable_f10cea9d-9faa-4e28-acd2-90caa9f8aa64.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 276406c3-5cb5-4fdc-ae6e-b9a3ff6e5027
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseBy
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2aa6cefa-cfb1-4d2b-ab0f-55e9c0dd6372
+		summarizeBy: none
+		sourceColumn: FirstResponseBy
+
+		variation Variation
+			isDefault
+			relationship: 12ff7a1d-7e69-449a-81ca-93e1490d9e57
+			defaultHierarchy: LocalDateTable_15ec6fab-b636-41d3-ae38-d5ded92c8b42.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseByKPI
+		dataType: string
+		lineageTag: 45c2248b-27c5-4a70-ac40-4ff91a9f44e5
+		summarizeBy: none
+		sourceColumn: FirstResponseByKPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseSent
+		dataType: string
+		lineageTag: bffd6f64-1806-490b-a5d5-fb6fed8b14a9
+		summarizeBy: none
+		sourceColumn: FirstResponseSent
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseSLAStatus
+		dataType: string
+		lineageTag: c395e655-01a9-47f4-af04-29af1231b2f4
+		summarizeBy: none
+		sourceColumn: FirstResponseSLAStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedOn
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0afd10ef-c90d-4309-acfa-da77a65d7916
+		summarizeBy: none
+		sourceColumn: ModifiedOn
+
+		variation Variation
+			isDefault
+			relationship: 3f4ec542-529f-454e-8148-a2720c2b71d3
+			defaultHierarchy: LocalDateTable_3a6171b6-da64-49ce-8fbe-7b7db9d3c488.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedByDelegate
+		dataType: string
+		lineageTag: 09847cb6-e85a-4035-850f-753a78bcf0da
+		summarizeBy: none
+		sourceColumn: ModifiedByDelegate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedBy
+		dataType: string
+		lineageTag: 361a1b17-c179-422d-89ac-ee486e7ce8e8
+		summarizeBy: none
+		sourceColumn: ModifiedBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedByUsername
+		dataType: string
+		lineageTag: 1ce0c1f8-7183-4870-a772-cd9cb7934db4
+		summarizeBy: none
+		sourceColumn: ModifiedByUsername
+
+		annotation SummarizationSetBy = Automatic
+
+	column Resolution
+		dataType: string
+		lineageTag: 0d5b9030-33b5-4fb3-87ec-dd539cbc3e14
+		summarizeBy: none
+		sourceColumn: Resolution
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolutionDate
+		dataType: string
+		lineageTag: 593b1917-b960-48d1-8afc-9c0383c2d25d
+		summarizeBy: none
+		sourceColumn: ResolutionDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolveByKPI
+		dataType: string
+		lineageTag: 83e9cc11-c9ff-4fc1-a87a-ed7fcb8a3b9e
+		summarizeBy: none
+		sourceColumn: ResolveByKPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolveBySLAStatus
+		dataType: string
+		lineageTag: e4bf2442-a6be-44ec-8415-8df817b5b94b
+		summarizeBy: none
+		sourceColumn: ResolveBySLAStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA
+		dataType: string
+		lineageTag: f0064310-9098-4346-a15f-eac68eb16f63
+		summarizeBy: none
+		sourceColumn: SLA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Severity
+		dataType: string
+		lineageTag: dffedf00-248d-4907-9add-a80ff1d27615
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		lineageTag: 73640a8d-1a9c-48aa-a2a7-50555f23c5d8
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseAgeByDay
+		dataType: int64
+		formatString: 0
+		lineageTag: eb4ed0e4-b84d-41b2-932b-74cdf242aeec
+		summarizeBy: sum
+		sourceColumn: CaseAgeByDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c063b4e-8bd8-4b45-9d43-89ade2f619ab
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 6f003284-51fb-43db-af52-7079c999d81e
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: double
+		lineageTag: 6159bdb3-ff32-4b31-a502-1ec0dca6a61b
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: f4a464a9-c7b6-4801-a59e-e60b51b5c378
+		summarizeBy: none
+		sourceColumn: Month Name
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: double
+		lineageTag: e2825c77-4956-4e0e-85bb-2fe6bb2afed6
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Case Age Bucket'
+		dataType: string
+		lineageTag: 33d38fca-b2fb-400d-84fd-d56da1e461d5
+		summarizeBy: none
+		sourceColumn: Case Age Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Quarter Hierarchy'
+		lineageTag: 7e29be1f-2baf-4c10-a887-7c7cea77f82d
+
+		level Quarter
+			lineageTag: 48575e79-f50d-474b-bbab-239654fa21e2
+			column: Quarter
+
+		level 'Month Name'
+			lineageTag: 1d9716ef-7290-48ac-b2d7-c1cdabc3c964
+			column: 'Month Name'
+
+	partition SupportCases = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("fyfkw7m3j2turesqzhmd4xccau-5yqac5fbqhqefee3v22th3cxwm.datawarehouse.fabric.microsoft.com"),
+				    SupportCases_LH = Source{[Name="SupportCases_LH"]}[Data],
+				    dbo_SupportCases = SupportCases_LH{[Schema="dbo",Item="SupportCases"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_SupportCases,{{"Month name", "Month Name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

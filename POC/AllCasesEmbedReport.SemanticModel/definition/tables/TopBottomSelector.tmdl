@@ -1,0 +1,21 @@
+table TopBottomSelector
+	lineageTag: 5d7901d7-7b4b-436f-a643-7d26354033fd
+
+	column View
+		lineageTag: a7c32659-5a95-40c4-b544-bb5ccd764169
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [View]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TopBottomSelector = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE("View", STRING, { {"Top 5"}, {"Bottom 5"} })
+				
+				```
+
+	annotation PBI_Id = 2263a1db5e7c487483c54cd9f5add6c0
+

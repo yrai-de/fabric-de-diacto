@@ -1,0 +1,41 @@
+table CaseAgeBucketSort
+	lineageTag: 5f7abb55-f1eb-49e9-880b-576bb3ceb113
+
+	column 'Case Age Bucket'
+		lineageTag: 973303cb-6bad-4bc8-b724-669348c36f44
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Case Age Bucket]
+		sortByColumn: 'Sort Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Order'
+		formatString: 0
+		lineageTag: 30025ce6-adfa-4e11-91ee-86f68d53e698
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Sort Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CaseAgeBucketSort = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Case Age Bucket", STRING,
+				    "Sort Order", INTEGER,
+				    {
+				        {"Under 7 days", 1},
+				        {"8-14 days", 2},
+				        {"15-30 days", 3},
+				        {"31-60 days", 4},
+				        {"Over 61 days", 5}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = ba49ed80daa644f688056ee2d337209e
+

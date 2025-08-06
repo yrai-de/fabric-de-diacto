@@ -1,0 +1,68 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Sales_data",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Returns": {
+      "queryId": "9fb9e845-bff8-4bca-abad-512ae46bb946",
+      "queryName": "Returns",
+      "loadEnabled": false
+    },
+    "Sales_Central": {
+      "queryId": "48aee202-1163-471b-b559-5cec3307da85",
+      "queryName": "Sales_Central",
+      "loadEnabled": false
+    },
+    "Sales_East": {
+      "queryId": "b3c288e2-fdd3-4821-ae8a-e867d8a78f10",
+      "queryName": "Sales_East",
+      "loadEnabled": false
+    },
+    "Sales_South": {
+      "queryId": "cd798409-5157-44b6-acb7-1c29ca3ddd94",
+      "queryName": "Sales_South",
+      "loadEnabled": false
+    },
+    "Sales_West": {
+      "queryId": "d6c28c00-f147-4c9f-ad56-810fa532a654",
+      "queryName": "Sales_West",
+      "loadEnabled": false
+    },
+    "SalesPerson": {
+      "queryId": "6b31fb4f-020d-463b-8a4b-c5a231a75480",
+      "queryName": "SalesPerson",
+      "loadEnabled": false
+    },
+    "AllSales": {
+      "queryId": "1daa1e02-45ec-4212-b3c9-ba0d7a0577f6",
+      "queryName": "AllSales",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "e4a5d6a9-2cca-4866-98d3-2c26ddd8a286",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://diacto.sharepoint.com/sites/PowerBICOE",
+      "kind": "SharePoint",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"9fb928c3-d062-4266-a67d-ddcc068f70bd\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"987f1627-7b50-493f-bc26-d4a2b573136b\"}"
+    },
+    {
+      "path": "https://diacto-my.sharepoint.com/personal/nidhi_nair_diacto_com/",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"de4980e4-ea4a-409f-8c15-b0a72ed18b21\"}"
+    }
+  ],
+  "fastCombine": true
+}

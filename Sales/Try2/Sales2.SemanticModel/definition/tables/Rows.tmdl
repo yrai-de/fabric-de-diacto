@@ -1,0 +1,51 @@
+table Rows
+	lineageTag: 22eea363-bdd3-4061-bc21-d4ba99b63a10
+
+	column Rows
+		lineageTag: 26159d51-83de-4260-b7f5-0514309c6fd8
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Rows Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Rows Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rows Fields'
+		isHidden
+		lineageTag: b80a3d8c-15e4-4f1d-98a2-c974cf042be7
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Rows Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rows Order'
+		isHidden
+		formatString: 0
+		lineageTag: 990153fb-636d-4b11-92a4-801c13a9be9f
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rows = calculated
+		mode: import
+		source =
+				{
+				    ("Category", NAMEOF('sales2'[Category]), 0),
+				    ("Country", NAMEOF('sales2'[Country]), 1),
+				    ("OrderDate", NAMEOF('sales2'[OrderDate]), 2),
+				    ("ProductName", NAMEOF('sales2'[ProductName]), 3),
+				    ("ShipMode", NAMEOF('sales2'[ShipMode]), 4)
+				}
+
+	annotation PBI_Id = 8dbfef57e7634fcfb1dc9da0dbb2add2
+

@@ -1,0 +1,126 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Dataflow1",
+        "type": "RefreshDataflow",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "4ba6b23e-d05a-43eb-82f0-07a21f6dc3ff",
+          "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      },
+      {
+        "name": "Notebook1",
+        "type": "TridentNotebook",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Dataflow1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "da2e85d0-efaf-4aee-b354-b9cf27c6f4af",
+          "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3"
+        }
+      },
+      {
+        "name": "Semantic model refresh1",
+        "type": "PBISemanticModelRefresh",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Notebook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "post",
+          "waitOnCompletion": true,
+          "commitMode": "Transactional",
+          "operationType": "SemanticModelRefresh",
+          "groupId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "datasetId": "6e1fe3e1-fa4a-41e7-8dd3-62ae2cedee0d"
+        },
+        "externalReferences": {
+          "connection": "bc05d01a-1f41-4c42-a1c7-777129bdff45"
+        }
+      },
+      {
+        "name": "Bronze_DF",
+        "type": "RefreshDataflow",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "cf6d4cce-7ea2-42f2-9f81-38dd0b2e97fe",
+          "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      },
+      {
+        "name": "Silver_DF",
+        "type": "RefreshDataflow",
+        "dependsOn": [
+          {
+            "activity": "Bronze_DF",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "3f14fa0e-ccaa-4d01-a010-2a8e3096df3b",
+          "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      }
+    ]
+  }
+}

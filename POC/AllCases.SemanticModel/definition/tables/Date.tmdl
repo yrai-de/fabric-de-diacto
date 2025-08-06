@@ -1,0 +1,92 @@
+table Date
+	lineageTag: d86f4404-1156-4d46-b8bc-f653bb585fa3
+
+	column Date
+		formatString: General Date
+		lineageTag: 35d66b69-de71-46a6-bdb4-bc08a06da79c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 399ed79a-435b-4057-a938-d944be6e930d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		lineageTag: f59e89ad-c57f-44d6-b90a-ef169677de47
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		formatString: 0
+		lineageTag: 5cd06d61-7bd3-44bd-a067-6db1b0b74847
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNumber
+		formatString: 0
+		lineageTag: 08178a87-7e13-4acd-85d5-085433b88e05
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 2a36c74a-af92-48dd-a396-22ff5ef1e17e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		lineageTag: c22d4fd0-ee36-4982-8006-a47788d1fb91
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DayName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsToday
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fabca246-0c57-487b-90a4-f5ed8a4574db
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsToday]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS (
+				    CALENDAR (DATE(2025,1,1), TODAY()),
+				    "Year", YEAR([Date]),
+				    "Month", FORMAT([Date], "MMM"),
+				    "MonthNumber", MONTH([Date]),
+				    "Week", WEEKNUM([Date], 2),
+				    "Day", DAY([Date]),
+				    "DayName", FORMAT([Date], "DDD"),
+				    "IsToday", [Date] = TODAY()
+				)
+				
+				```
+
+	annotation PBI_Id = 218db4a4626d4ed18631c6316530531b
+

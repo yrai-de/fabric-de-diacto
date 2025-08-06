@@ -1,0 +1,31 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["SupportCases"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.145.1457.0 (25.07)+6e87ffa743c5aa106a85a0b5e383d76d522045ba
+
+ref table SupportCases
+ref table DateTableTemplate_189bd2c4-3b87-40a6-9cc3-fdf5225d8ee4
+ref table LocalDateTable_42925a8b-de39-40fd-9237-00d1efc45cd6
+ref table LocalDateTable_f10cea9d-9faa-4e28-acd2-90caa9f8aa64
+ref table LocalDateTable_15ec6fab-b636-41d3-ae38-d5ded92c8b42
+ref table LocalDateTable_3a6171b6-da64-49ce-8fbe-7b7db9d3c488
+ref table 'Measure '
+ref table Date
+ref table LocalDateTable_9d8ed823-9fa5-41b2-9eed-2549a64edaea
+ref table TopBottomSelector
+ref table CaseAgeBucketSort
+
+ref role EmbedApp
+ref role EmbedRole
+
+ref cultureInfo en-US
+

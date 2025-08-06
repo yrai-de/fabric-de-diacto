@@ -1,0 +1,51 @@
+table CaseAgeBucketSort
+	lineageTag: 1a122318-2c73-4803-ad8d-22456317f76c
+
+	measure 'Enhancement Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Enhancement"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: b526ec0f-3fa6-4e1c-b4d7-3fab83896a70
+
+	column 'Case Age Bucket'
+		lineageTag: 23fac9f6-f10c-4c9d-ac6a-4be70d70e74f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Case Age Bucket]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Order'
+		formatString: 0
+		lineageTag: 30790774-58ab-42f0-b3b4-bd347ca5399d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Sort Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CaseAgeBucketSort = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Case Age Bucket", STRING,
+				    "Sort Order", INTEGER,
+				    {
+				        {"Under 7 days", 1},
+				        {"8-14 days", 2},
+				        {"15-30 days", 3},
+				        {"31-60 days", 4},
+				        {"Over 61 days", 5}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = b5820472880349ad9f93846ed0b1a82e
+

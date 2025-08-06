@@ -1,0 +1,97 @@
+table Date
+	lineageTag: 31dd35ab-a02e-4ab1-808c-75e23db6d530
+
+	column Date
+		formatString: General Date
+		lineageTag: c93d3aeb-eada-47e9-8124-be8a5a5f3ea8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 3674c889-6ac1-470f-b1db-2a44811f1f58
+			defaultHierarchy: LocalDateTable_9d8ed823-9fa5-41b2-9eed-2549a64edaea.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: ee4bf24f-a242-4c98-8e00-dcd7bd06190a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		lineageTag: 1414d489-f8be-4501-abd9-967d6090fbd0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNumber
+		formatString: 0
+		lineageTag: d3a46051-c50f-4ce8-974b-94d63be38eb8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MonthNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		formatString: 0
+		lineageTag: e9206680-fa31-48ab-8024-9f7cdb67433a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 90fcae7c-3973-4922-a215-74fab9c62e01
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		lineageTag: 03dca652-7f2c-421c-8fa5-87507e23e3df
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DayName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsToday
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3c3dcecd-eddd-4c83-824c-466d8ee5a46f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsToday]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source = ```
+				
+				ADDCOLUMNS (
+				    CALENDAR (DATE(2025,1,1), TODAY()),
+				    "Year", YEAR([Date]),
+				    "Month", FORMAT([Date], "MMM"),
+				    "MonthNumber", MONTH([Date]),
+				    "Week", WEEKNUM([Date], 2),
+				    "Day", DAY([Date]),
+				    "DayName", FORMAT([Date], "DDD"),
+				    "IsToday", [Date] = TODAY()
+				)
+				
+				```
+
+	annotation PBI_Id = 43812a200a1b44109a8ebb8091bc4f72
+

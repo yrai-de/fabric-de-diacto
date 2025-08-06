@@ -1,0 +1,52 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Sales_2",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DefaultDestination": {
+      "queryId": "98412832-4203-4ffc-afb5-f945eba205da",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "sales2": {
+      "queryId": "50df95f6-0bf5-4300-8a31-3781759da900",
+      "queryName": "sales2",
+      "loadEnabled": false
+    },
+    "sample_sales(east)": {
+      "queryId": "7bd5d5e7-d9f0-4566-a962-067d80095c94",
+      "queryName": "sample_sales(east)",
+      "loadEnabled": false
+    },
+    "sample_sales(returns)": {
+      "queryId": "417c1828-c7a6-42da-ae9e-a66582e6823d",
+      "queryName": "sample_sales(returns)",
+      "loadEnabled": false
+    },
+    "sample_sales(salesperson)": {
+      "queryId": "b5067e78-bd14-467d-a0c3-2ef26c033f11",
+      "queryName": "sample_sales(salesperson)",
+      "loadEnabled": false
+    },
+    "sample_sales(south)": {
+      "queryId": "88773fae-2da7-4337-a433-4c17a1a16588",
+      "queryName": "sample_sales(south)",
+      "loadEnabled": false
+    },
+    "sample_sales(west)": {
+      "queryId": "a036c2a9-9232-43e8-ba2f-52ccdf7f5679",
+      "queryName": "sample_sales(west)",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"987f1627-7b50-493f-bc26-d4a2b573136b\"}"
+    }
+  ]
+}

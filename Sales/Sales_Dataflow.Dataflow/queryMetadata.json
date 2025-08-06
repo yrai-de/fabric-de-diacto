@@ -1,0 +1,52 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Sales_Dataflow",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "All_Sales": {
+      "queryId": "c0eef8ec-0d86-4b12-9afd-41e23c803bd0",
+      "queryName": "All_Sales",
+      "loadEnabled": false
+    },
+    "sample_sales(east)": {
+      "queryId": "4cc5d948-7121-4e0f-a1db-f16e0bcf842a",
+      "queryName": "sample_sales(east)",
+      "loadEnabled": false
+    },
+    "sample_sales(returns)": {
+      "queryId": "36756732-7e91-4b55-b2d8-362ce477c252",
+      "queryName": "sample_sales(returns)",
+      "loadEnabled": false
+    },
+    "sample_sales(salesperson)": {
+      "queryId": "12f4dad3-edf9-41d4-881c-e757e6f072ec",
+      "queryName": "sample_sales(salesperson)",
+      "loadEnabled": false
+    },
+    "sample_sales(south)": {
+      "queryId": "2d788dda-c279-40f0-a993-8a16eefdeca5",
+      "queryName": "sample_sales(south)",
+      "loadEnabled": false
+    },
+    "sample_sales(west)": {
+      "queryId": "0bd34667-a6ff-49c8-be78-699afc30f5f9",
+      "queryName": "sample_sales(west)",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "612cd7f3-fdba-4503-a6d5-dec947b8c6d5",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"987f1627-7b50-493f-bc26-d4a2b573136b\"}"
+    }
+  ]
+}

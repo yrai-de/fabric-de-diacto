@@ -1,0 +1,8 @@
+relationship 66fe9d36-604a-5424-77a4-f9f4c5d6f3da
+	fromColumn: SupportCases.CreatedOn
+	toColumn: Date.Date
+
+relationship 5e77e534-68a9-4ca9-6102-3e362c238f92
+	fromColumn: SupportCases.'Case Age Bucket'
+	toColumn: CaseAgeBucketSort.'Case Age Bucket'
+

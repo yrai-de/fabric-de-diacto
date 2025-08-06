@@ -1,0 +1,5 @@
+role EmbedRole
+	modelPermission: read
+
+	annotation PBI_Id = 6ce251dc942e469a8c23c9a4263da2ea
+

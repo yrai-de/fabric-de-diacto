@@ -1,0 +1,85 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Migration_Data",
+        "type": "Copy",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "RestSource",
+            "httpRequestTimeout": "00:01:40",
+            "requestInterval": "00.00:00:00.010",
+            "requestMethod": "GET",
+            "additionalHeaders": {
+              "X-CMC_PRO_API_KEY": "1e771e56-77fc-44ba-8d3e-14e5bd0549ba",
+              "Accepts": "application/json"
+            },
+            "paginationRules": {
+              "supportRFC5988": "true"
+            },
+            "datasetSettings": {
+              "annotations": [],
+              "type": "RestResource",
+              "typeProperties": {
+                "relativeUrl": "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+              },
+              "schema": [],
+              "externalReferences": {
+                "connection": "b37a11e6-22a7-4d43-9c27-a5cab2efff97"
+              }
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "Sales",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+                    "artifactId": "e2af9891-1525-4030-adda-61a676f46f85",
+                    "rootFolder": "Tables"
+                  }
+                }
+              },
+              "type": "LakehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "table": "coin"
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            },
+            "columnFlattenSettings": {
+              "treatArrayAsString": false,
+              "treatStructAsString": false,
+              "flattenColumnDelimiter": "."
+            }
+          }
+        }
+      }
+    ]
+  }
+}

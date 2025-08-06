@@ -1,0 +1,673 @@
+table 'Measure '
+	lineageTag: 5189128d-120a-4896-85b9-1f58c889c55d
+
+	measure '% High Priority' = ```
+			
+			DIVIDE([High Priority Active Cases], [Active Cases])
+			
+			```
+		lineageTag: dd883f75-0c89-441d-b390-6a796022d2b8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Active Cases' = ```
+			
+			CALCULATE(COUNTROWS('SupportCases'), 'SupportCases'[Status] = "Active")
+			
+			```
+		formatString: 0
+		lineageTag: afe890c9-b1c5-4ee1-afb4-46f91e9837fd
+
+	measure 'Active Cases % Change' = ```
+			
+			VAR Previous = [Active Cases Last 30 Days]
+			VAR Cur = [Active Cases]
+			RETURN
+			IF(
+			    NOT ISBLANK(Previous),
+			    DIVIDE(Cur - Previous, Previous),
+			    BLANK()
+			)
+			
+			
+			```
+		lineageTag: abf7684f-2f60-4984-a158-f7c29fe93a3e
+
+	measure 'Active Cases Last 30 Days' = ```
+			
+			CALCULATE(
+			    [Active Cases],
+			    DATESINPERIOD('Date'[Date], MAX('Date'[Date]) - 30, -30, DAY)
+			)
+			
+			
+			```
+		lineageTag: 961fb6ba-b8b0-463c-a26c-4691a95549ad
+
+	measure 'Active Cases TTR Bucketed' = ```
+			
+			VAR DaysOld = DATEDIFF(SELECTEDVALUE(SupportCases[CreatedOn]), TODAY(), DAY)
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    DaysOld < 30, CALCULATE(COUNTROWS('SupportCases'), SupportCases[Status] = "Active", DATEDIFF(SupportCases[CreatedOn], TODAY(), DAY) < 30),
+			    DaysOld >= 30, CALCULATE(COUNTROWS(SupportCases), SupportCases[Status] = "Active", DATEDIFF(SupportCases[CreatedOn], TODAY(), DAY) >= 30)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e9a50d8e-1ce7-40e2-a89c-91fb08ba616e
+
+	measure 'Active Subtitle' = ```
+			
+			VAR Change = [Active Cases % Change]
+			RETURN
+			IF(
+			    ISBLANK(Change), BLANK(),
+			    IF(Change >= 0, "↑ vs last week", "↓ vs last week")
+			)
+			
+			```
+		lineageTag: a0b89d38-1f8b-4e63-84e6-aea14923461d
+
+	measure 'Active Trend Icon' = ```
+			
+			VAR Change = [Active Cases % Change]
+			RETURN
+			IF(
+			    ISBLANK(Change), BLANK(),
+			    IF(Change >= 0, UNICHAR(9650), UNICHAR(9660))  -- ▲ ▼
+			)
+			
+			```
+		lineageTag: e645f72f-d30f-4dc2-b847-27ccb36cefb1
+
+	measure AgedCases = CALCULATE(COUNTROWS('SupportCases'), 'SupportCases'[Status] = "Active" && DATEDIFF('SupportCases'[CreatedOn], TODAY(), DAY) > 30)
+		formatString: 0
+		lineageTag: 20102855-e05f-48ad-82f2-3cbf5e06af03
+
+	measure 'Average TTR' = AVERAGE('SupportCases'[TTR])
+		lineageTag: 20dd0021-bdd4-4777-a5f4-408369ed3837
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AverageFirstResponseHours = ```
+			
+			AVERAGEX(
+			    FILTER(
+			        'SupportCases',
+			        NOT(ISBLANK('SupportCases'[CreatedOn])) &&
+			        NOT(ISBLANK('SupportCases'[FirstResponseBy]))
+			    ),
+			    DIVIDE(
+			        DATEDIFF('SupportCases'[CreatedOn], 'SupportCases'[FirstResponseBy], SECOND),
+			        3600
+			    )
+			)
+			
+			
+			```
+		lineageTag: baf52794-5519-43e6-9f02-764dd72672d7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Response Time (Hours)' = ```
+			
+			AVERAGEX(
+			    FILTER(
+			        'SupportCases',
+			        NOT(ISBLANK('SupportCases'[FirstResponseBy]))
+			            && 'SupportCases'[FirstResponseBy] >= 'SupportCases'[CreatedOn]
+			    ),
+			    DATEDIFF('SupportCases'[CreatedOn], 'SupportCases'[FirstResponseBy], HOUR)
+			)
+			
+			```
+		lineageTag: 4746574c-e313-4a9a-98f1-7b33b2a2a232
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Check Last Week Data' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    DATESINPERIOD('Date'[Date], MAX('Date'[Date]) - 7, -7, DAY)
+			)
+			
+			```
+		lineageTag: 01eb99cb-c8bf-4951-85a6-78cad751ef62
+
+	measure 'Closed Cases' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('SupportCases'[CaseNumber]),
+			    'SupportCases'[Status] = "Resolved"
+			)
+		formatString: 0
+		lineageTag: aa7e34e1-f61b-4ccd-bbac-59a5698d7b55
+
+	measure 'Closed Cases - Last Week' = ```
+			
+			CALCULATE(COUNTROWS('SupportCases'), 
+			    'SupportCases'[Status] = "Closed", 
+			    'SupportCases'[DeactivatedOn] >= TODAY() - 13 &&
+			    'SupportCases'[DeactivatedOn] <= TODAY() - 7)
+			```
+		formatString: 0
+		lineageTag: 3498b2fe-65d6-4956-92b0-62559258e239
+
+	measure 'Closed Cases - This Week' = ```
+			
+			CALCULATE(COUNTROWS('SupportCases'), 
+			    'SupportCases'[Status] = "Closed", 
+			    'SupportCases'[DeactivatedOn] >= TODAY() - 6)
+			```
+		formatString: 0
+		lineageTag: f54a4fcf-ba08-4b7c-bbe8-9acbb9fb633c
+
+	measure 'Closed Cases Trend %' =
+			
+			DIVIDE(
+			    [Closed Cases - This Week] - [Closed Cases - Last Week],
+			    [Closed Cases - Last Week]
+			)
+		lineageTag: 1896413e-af61-41fa-94f6-821f68f72465
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Closed Cases Trend Display' = ```
+			
+			"Closed: " & [Closed Cases - This Week] & 
+			" (" & FORMAT([Closed Cases Trend %], "0%") & ") " & 
+			IF([Closed Cases Trend %] >= 0, UNICHAR(9650), UNICHAR(9660)) -- ▲ or ▼
+			
+			```
+		lineageTag: 94a6f2ff-1dcc-435a-816b-de8058844340
+
+	measure 'Created - 14D' =
+			
+			CALCULATE(COUNTROWS('SupportCases'), 'SupportCases'[CreatedOn] >= TODAY() - 13)
+		formatString: 0
+		lineageTag: acd5025c-4660-4eaa-83c7-2dac9ade2e7f
+
+	measure 'Created - Prev 14D' = ```
+			
+			CALCULATE(COUNTROWS('SupportCases'), 
+			    'SupportCases'[CreatedOn] >= TODAY() - 27 &&
+			    'SupportCases'[CreatedOn] <= TODAY() - 14
+			)
+			```
+		formatString: 0
+		lineageTag: 9dfbae61-8074-4937-aed6-6ce4731fd7a6
+
+	measure 'Created Trend 14D %' =
+			
+			DIVIDE([Created - 14D] - [Created - Prev 14D], [Created - Prev 14D])
+		lineageTag: 3b856c0e-7252-4e06-a93e-0abac700d6fb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Created Trend 14D Display' = ```
+			
+			VAR Curr = [Created - 14D]
+			VAR Prev = [Created - Prev 14D]
+			VAR ChangePct = [Created Trend 14D %]
+			VAR Arrow = IF(ChangePct >= 0, UNICHAR(9650), UNICHAR(9660))  -- ▲ or ▼
+			VAR ChangeFormatted = FORMAT(ChangePct, "0%")
+			RETURN
+			"New Cases (14 Days): " & Curr & " (" & ChangeFormatted & ") " & Arrow
+			
+			```
+		lineageTag: d1f346f9-911a-41fe-8052-63c7219d8bbc
+
+	measure 'Defect Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "whatever"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 68d26a91-38f9-469e-8df2-9c42751d8468
+
+	measure 'Enhancement Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Enhancement"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 3a03d761-ab18-429b-ad11-0981caa163a9
+
+	measure 'Event Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Event"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 53b359ba-9d05-4f1b-ad75-b1110b78b46a
+
+	measure HasCommentIcon = ```
+			
+			VAR comment = SELECTEDVALUE('SupportCases'[closingcomments])
+			RETURN
+			    IF(
+			        NOT(ISBLANK(comment)),
+			        UNICHAR(128172),  // 💬 icon
+			        BLANK()
+			    )
+			
+			```
+		lineageTag: c4988a95-89ac-470f-b7bd-f2e8fa9bf98f
+
+	measure 'High Priority Active Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "High",
+			        'SupportCases'[Status] = "Active"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(CountHighActive) || CountHighActive = 0,
+			        "None",
+			        CountHighActive
+			    )
+		formatString: 0
+		lineageTag: 7bf3ba13-d702-41ab-b77d-c5e88a7a137b
+
+	measure 'High Priority Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "High"
+			    )
+			RETURN
+			    CountHighActive
+		formatString: 0
+		lineageTag: 2e9421ec-bd51-4ced-9d75-cbd3795da11f
+
+	measure HighPriorityCases_LastWeek = ```
+			
+			CALCULATE(
+			    COUNTROWS(SupportCases),
+			    FILTER(
+			        SupportCases,
+			        SupportCases[Priority] = "High" &&
+			        SupportCases[CreatedOn] >= MAX(SupportCases[CreatedOn]) - 14 &&
+			        SupportCases[CreatedOn] < MAX(SupportCases[CreatedOn]) - 7
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 3621d5a8-e998-4ac6-a81a-a19583fc55c0
+
+	measure HighPriorityCases_ThisWeek = ```
+			
+			CALCULATE(
+			    COUNTROWS(SupportCases),
+			    FILTER(
+			        SupportCases,
+			        SupportCases[Priority] = "High" &&
+			        SupportCases[CreatedOn] >= MAX(SupportCases[CreatedOn]) - 7 &&
+			        SupportCases[CreatedOn] <= MAX(SupportCases[CreatedOn])
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 0b538d18-5b32-4424-a713-d6f68ffc42c8
+
+	measure HighPriorityCases_Trend = ```
+			
+			DIVIDE(
+			    [HighPriorityCases_ThisWeek] - [HighPriorityCases_LastWeek],
+			    [HighPriorityCases_LastWeek],
+			    0
+			)
+			
+			```
+		lineageTag: 91f62c73-577b-4b5d-b4b3-f35f18cbdf86
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure HighPriorityCases_Trend_Display = ```
+			
+			VAR Arrow = 
+			    SWITCH(
+			        TRUE(),
+			        [HighPriorityCases_Trend] > 0, "▲",
+			        [HighPriorityCases_Trend] < 0, "▼",
+			        "■"
+			    )
+			RETURN
+			Arrow & " " & FORMAT([HighPriorityCases_Trend], "0.0%")
+			
+			```
+		lineageTag: f858ff6d-5c4e-422d-9fc6-9a89fa5ef622
+
+	measure 'Incident Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Incident" 
+			
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e44377c9-faa3-49a1-9dfe-741aa7c136c7
+
+	measure Insight_Active
+		lineageTag: 29329e04-1969-4a2b-a909-829eb3d47850
+
+	measure 'Low Priority Active Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "Low",
+			        'SupportCases'[Status] = "Active"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(CountHighActive) || CountHighActive = 0,
+			        "None",
+			        CountHighActive
+			    )
+		lineageTag: 1942b10a-a801-4185-85b7-30afacd858dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Low Priority Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "Low"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(CountHighActive) || CountHighActive = 0,
+			        "None",
+			        CountHighActive
+			    )
+		lineageTag: 547a70b7-ef24-4720-8c20-b185b0efb0d7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'New Cases - Last Week' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[CreatedOn] >= TODAY() - 13 &&
+			    'SupportCases'[CreatedOn] <= TODAY() - 7
+			)
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 370ef809-a263-4dbb-9c9c-64941581fa00
+
+	measure 'New Cases - This Week' =
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[CreatedOn] >= TODAY() - 6
+			)
+		formatString: 0
+		lineageTag: e0eec457-6d48-42f5-96ab-8ea4ee2e3566
+
+	measure 'New Cases Trend %' = ```
+			
+			VAR Prev = [New Cases - Last Week]
+			RETURN
+			IF(
+			    NOT ISBLANK(Prev),
+			    DIVIDE([New Cases - This Week] - Prev, Prev),
+			    BLANK()
+			)
+			
+			```
+		lineageTag: 8c26d680-e042-4a5a-92c6-63397b16c272
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'New Cases Trend Display' = ```
+			
+			VAR Curr = [New Cases - This Week]
+			VAR Change = [New Cases Trend %]
+			VAR Arrow = IF(Change >= 0, "▲", "▼")
+			RETURN
+			"New Cases (7 Days): " & Curr & " (" & FORMAT(Change, "0%") & ") " & Arrow
+			
+			```
+		lineageTag: cd6189ca-22ed-4a41-957d-79fab59abf3e
+
+	measure 'Normal Priority Active Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "Normal",
+			        'SupportCases'[Status] = "Active"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(CountHighActive) || CountHighActive = 0,
+			        "None",
+			        CountHighActive
+			    )
+		formatString: 0
+		lineageTag: d2ddde20-2683-4edc-ad2d-cc7a805f2f7a
+
+	measure 'Normal Priority Cases' =
+			
+			VAR CountHighActive =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        'SupportCases'[Priority] = "Normal"
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(CountHighActive) || CountHighActive = 0,
+			        "None",
+			        CountHighActive
+			    )
+		lineageTag: 223462e7-6738-42a9-ba8b-ec751dd77252
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Open Cases' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT('SupportCases'[CaseNumber]),
+			    'SupportCases'[Status] = "Active"
+			)
+		formatString: 0
+		lineageTag: 5c113061-517d-4bc7-ba45-423812b57d99
+
+	measure 'Problem Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Problem" 
+			
+			)
+			```
+		formatString: 0
+		lineageTag: 4a8e9861-8595-4894-8626-a36dfc9b08ac
+
+	measure 'Question Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Question" 
+			
+			)
+			```
+		formatString: 0
+		lineageTag: dcafa7ab-7c1f-4c88-81e9-99f629b6777c
+
+	measure RankByTTR = ```
+			
+			RANKX(
+			    ALL(SupportCases[SupportRep]),        
+			    CALCULATE(AVERAGE(SupportCases[TTR])), 
+			    ,
+			    DESC,
+			    DENSE
+			)
+			
+			
+			```
+		formatString: 0
+		lineageTag: e7933ccb-ddbe-44ab-b969-d1fd3db573ce
+
+	measure 'Request Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Request" 
+			
+			)
+			```
+		formatString: 0
+		lineageTag: 85ac4ea1-5527-4150-ae88-ff9202ecae21
+
+	measure 'Resolution Efficiency %' = ```
+			
+			VAR TotalCases = COUNTROWS('SupportCases')
+			VAR ClosedCases = 
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        FILTER('SupportCases', 'SupportCases'[Status] = "Closed")
+			    )
+			RETURN
+			DIVIDE(ClosedCases, TotalCases, 0)
+			
+			
+			```
+		lineageTag: fabff6ea-5e56-4efa-beaf-05ded46391eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Same Day Resolution %' = ```
+			
+			VAR ClosedCases =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        FILTER(
+			            'SupportCases',
+			            'SupportCases'[Status] = "Closed"
+			        )
+			    )
+			
+			VAR SameDayResolved =
+			    CALCULATE(
+			        COUNTROWS('SupportCases'),
+			        FILTER(
+			            'SupportCases',
+			            'SupportCases'[Status] = "Closed" &&
+			            NOT ISBLANK('SupportCases'[CreatedOn]) &&
+			            NOT ISBLANK('SupportCases'[DeactivatedOn]) &&
+			            DATEDIFF('SupportCases'[CreatedOn], 'SupportCases'[DeactivatedOn], DAY) = 0
+			        )
+			    )
+			
+			RETURN
+			IF(
+			    ClosedCases = 0,
+			    BLANK(),
+			    DIVIDE(SameDayResolved, ClosedCases)
+			)
+			
+			```
+		lineageTag: 19d7af63-feba-4c49-a81b-99e280aff3d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SelectedViewLabel = ```
+			SELECTEDVALUE(TopBottomSelector[View], "Top 5 Support Reps By Average Response Time")
+			
+			```
+		lineageTag: bff95e91-3965-44d2-95da-bc74178be6b6
+
+	measure ShowTopOrBottom5_TTR = ```
+			
+			VAR SelectedView = SELECTEDVALUE(TopBottomSelector[View])
+			VAR AvgTTR = CALCULATE(AVERAGE(SupportCases[TTR]))
+			VAR TopRank =
+			    RANKX(
+			        ALL(SupportCases[SupportRep]),
+			        CALCULATE(AVERAGE(SupportCases[TTR])),
+			        ,
+			        DESC,
+			        DENSE
+			    )
+			VAR BottomRank =
+			    RANKX(
+			        ALL(SupportCases[SupportRep]),
+			        CALCULATE(AVERAGE(SupportCases[TTR])),
+			        ,
+			        ASC,
+			        DENSE
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    SelectedView = "Top 5" && TopRank <= 5, 1,
+			    SelectedView = "Bottom 5" && BottomRank <= 5, 1,
+			    0
+			)
+			
+			```
+		lineageTag: e6e5f45f-7f6a-41b8-bd9b-91636d4000ef
+
+	measure 'TTR Bucket' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE('SupportCases'[TTR]) > 30, "Over 30 days",
+			    SELECTEDVALUE('SupportCases'[TTR]) <= 30, "30 or fewer days",
+			    BLANK()
+			)
+			
+			```
+		lineageTag: 94b0d3bd-321a-418c-8462-8ea324c3e1df
+
+	measure 'Weekly New Cases' =
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    USERELATIONSHIP('Date'[Date], 'SupportCases'[CreatedOn])
+			)
+		lineageTag: 64699b5e-b7a5-4002-abd2-5cfca6ea5f14
+
+	column Column
+		formatString: 0
+		lineageTag: bb56aba8-0f2c-4f1c-b859-9899d9806005
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Measure ' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 63dbf18c837b441da3dc730096e98c7d
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

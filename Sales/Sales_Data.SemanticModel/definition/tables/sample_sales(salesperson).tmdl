@@ -1,0 +1,33 @@
+table sample_sales(salesperson)
+	lineageTag: 82b257e2-87da-436e-8820-cceca669cf1c
+	sourceLineageTag: [dbo].[sample_sales(salesperson)]
+
+	column SalesPerson
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2952f459-ac18-4cb0-9566-48b489c0023f
+		sourceLineageTag: SalesPerson
+		summarizeBy: none
+		sourceColumn: SalesPerson
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3f49e912-2817-44fc-bedc-fcedc6af3060
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sample_sales(salesperson) = entity
+		mode: directLake
+		source
+			entityName: sample_sales(salesperson)
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

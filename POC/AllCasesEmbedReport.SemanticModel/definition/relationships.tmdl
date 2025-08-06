@@ -1,0 +1,33 @@
+relationship 9580eae2-f358-49a9-9d6b-e70a9900e9c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupportCases.DoNotModifyModifiedOn
+	toColumn: LocalDateTable_42925a8b-de39-40fd-9237-00d1efc45cd6.Date
+
+relationship 69689054-8430-4c74-9b46-5bb610958fc5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupportCases.DeactivatedOn
+	toColumn: LocalDateTable_f10cea9d-9faa-4e28-acd2-90caa9f8aa64.Date
+
+relationship 12ff7a1d-7e69-449a-81ca-93e1490d9e57
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupportCases.FirstResponseBy
+	toColumn: LocalDateTable_15ec6fab-b636-41d3-ae38-d5ded92c8b42.Date
+
+relationship 3f4ec542-529f-454e-8148-a2720c2b71d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: SupportCases.ModifiedOn
+	toColumn: LocalDateTable_3a6171b6-da64-49ce-8fbe-7b7db9d3c488.Date
+
+relationship 3674c889-6ac1-470f-b1db-2a44811f1f58
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_9d8ed823-9fa5-41b2-9eed-2549a64edaea.Date
+
+relationship ca6e973c-bc86-e0c7-b29e-8a372c1f49e5
+	fromColumn: SupportCases.CreatedOn
+	toColumn: Date.Date
+
+relationship 0217b61b-871b-a918-0acb-85ee6e06c1f2
+	fromColumn: SupportCases.'Case Age Bucket'
+	toColumn: CaseAgeBucketSort.'Case Age Bucket'
+

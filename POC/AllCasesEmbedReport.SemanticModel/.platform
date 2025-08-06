@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AllCasesEmbedReport"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e9f83d62-ec56-bc22-40bd-e35302dcbad9"
+  }
+}

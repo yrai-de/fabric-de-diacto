@@ -1,0 +1,28 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.146.7742.2 (Main)+d57fcea754f2b31db2a6b627cd49dc54ee4973e5
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+annotation PBI_ProTooling = ["WebModelingEdit"]
+
+ref table SupportCases
+ref table 'Measure '
+ref table Date
+ref table TopBottomSelector
+ref table CaseAgeBucketSort
+
+ref role admin
+ref role Embed
+
+ref cultureInfo en-US
+

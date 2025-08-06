@@ -1,0 +1,4 @@
+relationship f8b0b16f-eb47-ecc7-3b79-a20e9183c5b8
+	fromColumn: sales2.Region
+	toColumn: sample_sales_salesperson_.Region
+

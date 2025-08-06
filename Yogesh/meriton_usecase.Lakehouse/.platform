@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "meriton_usecase"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "13a29f17-2137-9c71-49ab-c5f010345ba3"
+  }
+}

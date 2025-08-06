@@ -1,0 +1,486 @@
+table SupportCases
+	lineageTag: d79d391e-2805-4fb7-944a-a5bca12a84c4
+	sourceLineageTag: [dbo].[SupportCases]
+
+	measure 'Event Cases Type' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'), 
+			    'SupportCases'[CaseType] = "Event"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: eae09c74-a16c-46a2-a6ae-87f23bdc9378
+
+		changedProperty = Name
+
+	column DoNotModifyCase
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: db43c309-0091-4787-8e6d-4807d9667ae0
+		sourceLineageTag: DoNotModifyCase
+		summarizeBy: none
+		sourceColumn: DoNotModifyCase
+
+		annotation SummarizationSetBy = Automatic
+
+	column DoNotModifyRowChecksum
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: de38d4c8-ad10-479b-ab88-5580ed205717
+		sourceLineageTag: DoNotModifyRowChecksum
+		summarizeBy: none
+		sourceColumn: DoNotModifyRowChecksum
+
+		annotation SummarizationSetBy = Automatic
+
+	column DoNotModifyModifiedOn
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2a419577-1e8d-45a2-aee5-431652f5b9d4
+		sourceLineageTag: DoNotModifyModifiedOn
+		summarizeBy: none
+		sourceColumn: DoNotModifyModifiedOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedOn
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: ea4a18ab-d1fe-41ca-8580-b5f61cfb5c81
+		sourceLineageTag: CreatedOn
+		summarizeBy: none
+		sourceColumn: CreatedOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseTitle
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e448b84e-010e-491a-bc90-575b24db9b8b
+		sourceLineageTag: CaseTitle
+		summarizeBy: none
+		sourceColumn: CaseTitle
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseNumber
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 78c793c7-84f6-4414-b4f7-02b4ba134adf
+		sourceLineageTag: CaseNumber
+		summarizeBy: none
+		sourceColumn: CaseNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Priority
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c9d8c049-4ced-40ad-a237-21b195b9ce82
+		sourceLineageTag: Priority
+		summarizeBy: none
+		sourceColumn: Priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origin
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ad1182e6-5928-4dd3-97d8-db4cf9fe616c
+		sourceLineageTag: Origin
+		summarizeBy: none
+		sourceColumn: Origin
+
+		annotation SummarizationSetBy = Automatic
+
+	column PortfolioCompany
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 644bfbcb-0223-4f8d-883c-29fb0e3e8754
+		sourceLineageTag: PortfolioCompany
+		summarizeBy: none
+		sourceColumn: PortfolioCompany
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8dfb76f5-f806-4fed-b79f-c309b039e55f
+		sourceLineageTag: Team
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column SupportRep
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0da41dda-d956-48a9-be17-b4084eb01ece
+		sourceLineageTag: SupportRep
+		summarizeBy: none
+		sourceColumn: SupportRep
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dc4868f8-2eff-47df-83fe-4bb43130b11d
+		sourceLineageTag: Status
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseAge
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 9c096027-6a5d-406f-a436-de8011652e5d
+		sourceLineageTag: CaseAge
+		summarizeBy: sum
+		sourceColumn: CaseAge
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseStatus
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ecc77613-d379-4cca-bd03-fc4738c43e56
+		sourceLineageTag: CaseStatus
+		summarizeBy: none
+		sourceColumn: CaseStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseStage
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 805d22f1-f39f-4c23-a2a0-1332d9f6f615
+		sourceLineageTag: CaseStage
+		summarizeBy: none
+		sourceColumn: CaseStage
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5b567273-3090-41fd-8a4a-28b4aedfd371
+		sourceLineageTag: CaseType
+		summarizeBy: none
+		sourceColumn: CaseType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosingComments
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 39a0f611-4aa8-4208-8189-e1bc6cb7aa5b
+		sourceLineageTag: ClosingComments
+		summarizeBy: none
+		sourceColumn: ClosingComments
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosingReason
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bf56dde9-a770-4bf1-8ead-84eff421c750
+		sourceLineageTag: ClosingReason
+		summarizeBy: none
+		sourceColumn: ClosingReason
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contact
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 648f81bd-eb3b-4d82-99d2-bf9c28fcab4b
+		sourceLineageTag: Contact
+		summarizeBy: none
+		sourceColumn: Contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeactivatedOn
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 743b4a3a-bcbc-4e6c-a1ac-f18ff3311f5f
+		sourceLineageTag: DeactivatedOn
+		summarizeBy: none
+		sourceColumn: DeactivatedOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3b4a4b9d-d985-41c8-85ae-a109d301a234
+		sourceLineageTag: EmailAddress
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseBy
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: a3291eae-b1f2-4bb7-9116-f4c1f8fece62
+		sourceLineageTag: FirstResponseBy
+		summarizeBy: none
+		sourceColumn: FirstResponseBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseByKPI
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6bd95d8b-accf-40fa-9483-7f6dd0b24aa9
+		sourceLineageTag: FirstResponseByKPI
+		summarizeBy: none
+		sourceColumn: FirstResponseByKPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseSent
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 68a93de4-a656-4c29-bb3d-8a88dd392e57
+		sourceLineageTag: FirstResponseSent
+		summarizeBy: none
+		sourceColumn: FirstResponseSent
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstResponseSLAStatus
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3f44cd87-e002-41f6-8296-25928c45b8af
+		sourceLineageTag: FirstResponseSLAStatus
+		summarizeBy: none
+		sourceColumn: FirstResponseSLAStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedOn
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: fd793e4f-4c18-43b1-9667-6970eb817588
+		sourceLineageTag: ModifiedOn
+		summarizeBy: none
+		sourceColumn: ModifiedOn
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedByDelegate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a38366e6-3751-48d5-9750-6b514a72e8cc
+		sourceLineageTag: ModifiedByDelegate
+		summarizeBy: none
+		sourceColumn: ModifiedByDelegate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedBy
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3d2155dd-318c-4482-9633-1dbfa6f9184b
+		sourceLineageTag: ModifiedBy
+		summarizeBy: none
+		sourceColumn: ModifiedBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModifiedByUsername
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 91084475-a0f0-4edc-8ad0-a8c51ea1cdc2
+		sourceLineageTag: ModifiedByUsername
+		summarizeBy: none
+		sourceColumn: ModifiedByUsername
+
+		annotation SummarizationSetBy = Automatic
+
+	column Resolution
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 40e4b833-8e69-490c-b936-409b2f49c1b1
+		sourceLineageTag: Resolution
+		summarizeBy: none
+		sourceColumn: Resolution
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolutionDate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 43661e4b-bcde-4c27-af58-d62940ae6645
+		sourceLineageTag: ResolutionDate
+		summarizeBy: none
+		sourceColumn: ResolutionDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolveByKPI
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 50cf05ee-49ca-48cd-8370-9e32aafdd5e0
+		sourceLineageTag: ResolveByKPI
+		summarizeBy: none
+		sourceColumn: ResolveByKPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column ResolveBySLAStatus
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 92fc6c98-0360-40e0-b8ea-7c004862ea08
+		sourceLineageTag: ResolveBySLAStatus
+		summarizeBy: none
+		sourceColumn: ResolveBySLAStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0d26a664-b8c1-4ad6-a5f7-e455a4f05b32
+		sourceLineageTag: SLA
+		summarizeBy: none
+		sourceColumn: SLA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Severity
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ba229c19-076c-479e-aab5-a73152aa0583
+		sourceLineageTag: Severity
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subject
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e3978305-8a7e-431f-bf8a-0d079ca76723
+		sourceLineageTag: Subject
+		summarizeBy: none
+		sourceColumn: Subject
+
+		annotation SummarizationSetBy = Automatic
+
+	column CaseAgeByDay
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 5981b741-6b6a-4a7d-af27-cdca957e7e70
+		sourceLineageTag: CaseAgeByDay
+		summarizeBy: sum
+		sourceColumn: CaseAgeByDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column TTR
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 9b2fa484-da62-4fcd-886f-da90e3e23d74
+		sourceLineageTag: TTR
+		summarizeBy: sum
+		sourceColumn: TTR
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bfab436e-3ccb-4a63-84bf-6da4026e9717
+		sourceLineageTag: Quarter
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 3a854369-68fa-46fc-b4b8-8bbed4a00d17
+		sourceLineageTag: Month
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Month name'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b484a01c-d511-4d3a-9251-72a474504ca4
+		sourceLineageTag: Month name
+		summarizeBy: none
+		sourceColumn: Month name
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: double
+		sourceProviderType: float
+		lineageTag: cfad474e-a50a-4077-bd5c-6615a28e2b34
+		sourceLineageTag: Day
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Case Age Bucket'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b98723c1-8d45-4c1b-9b06-f3b2b98d63fd
+		sourceLineageTag: Case Age Bucket
+		summarizeBy: none
+		sourceColumn: Case Age Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Quarter Hierarchy'
+		lineageTag: 32036dbb-e2b3-4d2d-a236-f88b6545c904
+
+		level Quarter
+			lineageTag: e209ddb4-0db8-4da4-a9dd-df586af08278
+			column: Quarter
+
+		level Month
+			lineageTag: 974f29be-76be-4cb2-bf42-69c9e0c043fc
+			column: Month
+
+		level 'Month name'
+			lineageTag: dc216550-b6cd-4690-a67c-424a3ef8964f
+			column: 'Month name'
+
+	partition SupportCases = entity
+		mode: directLake
+		source
+			entityName: SupportCases
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

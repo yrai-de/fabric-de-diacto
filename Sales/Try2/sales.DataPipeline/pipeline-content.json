@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Dataflow",
+        "type": "RefreshDataflow",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "15b78a60-a82a-4af0-8ac5-9b5d0a734ac1",
+          "workspaceId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      },
+      {
+        "name": "Semantic model refresh1",
+        "type": "PBISemanticModelRefresh",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Dataflow",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "POST",
+          "operationType": "SemanticModelRefresh",
+          "groupId": "740120ee-81a1-42e0-909b-aeb533ec57b3",
+          "datasetId": "aa04f010-6cce-4d7c-8e6b-38cdcc1feb5a",
+          "objects": "[\n  \"sales2\",\n  \"sales_salesperson\"\n]\n"
+        }
+      }
+    ],
+    "parameters": {
+      "sales2": {
+        "type": "String"
+      },
+      "[sales2, sales_salesperson]": {
+        "type": "Array"
+      }
+    }
+  }
+}

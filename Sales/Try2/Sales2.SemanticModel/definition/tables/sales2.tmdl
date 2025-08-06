@@ -1,0 +1,322 @@
+table sales2
+	lineageTag: ab86854c-691b-416f-a183-d3661b0d6442
+	sourceLineageTag: [dbo].[sales2]
+
+	measure 'Total Sales' = ```
+			SUM(sales2[Sales])
+			
+			```
+		lineageTag: cf6c473c-0dd3-462f-a15f-a4efc799a2c0
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Returns' =
+			
+			CALCULATE(
+			    SUM(sales2[Sales]),
+			    sales2[returned _2_] = "Yes"
+			)
+		lineageTag: c61e7265-e2dc-4f1f-94f3-de7853b18c69
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Sales' = ```
+			[Total Sales] - [Total Returns]
+			
+			```
+		lineageTag: 1c7a0fd5-c995-4c04-aae0-96f643f6c28f
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Return Rate (%)' = ```
+			
+			DIVIDE([Total Returns], [Total Sales], 0)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2d4a48df-86c6-4b59-a9b8-6789b279fc7a
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'Return Ratio by Salesperson' = ```
+			
+			DIVIDE(
+			    CALCULATE(SUM(sales2[Sales]), sales2[returned _2_] = "Yes"),
+			    CALCULATE(SUM(sales2[Sales]), sales2[returned _2_] = "No"),
+			    0
+			)
+			
+			```
+		lineageTag: 69b34f9d-6e67-406e-a3d8-e1f37600ae0d
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'High Return Product Name' = ```
+			
+			VAR SummaryTable =
+			    SUMMARIZE(
+			        sales2, 
+			        sales2[ProductName], 
+			        "Returns", CALCULATE(SUM(sales2[Sales]), sales2[returned _2_] = "Yes")
+			    )
+			VAR TopProduct =
+			    TOPN(1, SummaryTable, [Returns], DESC)
+			RETURN
+			    MAXX(TopProduct, sales2[ProductName])
+			
+			```
+		lineageTag: 7ba77650-35d2-43de-be6f-2114aa609489
+
+		changedProperty = Name
+
+	column RowID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 18f47e7f-228a-41b7-bd9a-d23a420e5f02
+		sourceLineageTag: RowID
+		summarizeBy: count
+		sourceColumn: RowID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2da68500-76cb-433d-814b-9c0acd36196f
+		sourceLineageTag: OrderID
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: d67d3482-973f-4943-9d94-ea500e0879b1
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShipDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: d351d058-93f7-4d05-af47-2361c3dc0591
+		sourceLineageTag: ShipDate
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShipMode
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c4086fee-3cf7-4e74-9fd3-ccbd66a57d72
+		sourceLineageTag: ShipMode
+		summarizeBy: none
+		sourceColumn: ShipMode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d06877b5-8247-4d9c-95c0-9626af1d0df1
+		sourceLineageTag: CustomerID
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dd1cb902-90ba-4169-bb77-bb1d0fc00cd8
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fbcb8432-d8bb-4ce1-bb0d-4b3ca7255a3e
+		sourceLineageTag: Segment
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9dd23d76-27dc-4f72-a5fd-dfc07d44f0d5
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1d2e7447-4104-495d-9913-130418be71a9
+		sourceLineageTag: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9c702cf0-9f2a-4343-94aa-2fd8c1de48d4
+		sourceLineageTag: State
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostalCode
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: acd01c02-9f46-43d3-827a-2e92b1ddc08c
+		sourceLineageTag: PostalCode
+		summarizeBy: count
+		sourceColumn: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9c554b11-606a-412c-8a9e-9861b522eb2f
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3fbb59dd-4b58-49df-a94b-702eff1e34c4
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2aaca6b-f9e6-4aa5-b704-e0150b5ac047
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubCategory
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d02c1b1a-22ef-483a-b7dd-505a999bdbd4
+		sourceLineageTag: SubCategory
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ca57cef7-e975-4e29-9e60-174fea24e54e
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		sourceProviderType: decimal(19, 4)
+		lineageTag: 63ed1885-4813-40da-ab9e-db6e0c663a7e
+		sourceLineageTag: Sales
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 1589886c-2ade-4859-9e05-5db2364923f3
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Discount
+		dataType: double
+		sourceProviderType: float
+		lineageTag: f51841be-25e3-4f78-82b5-df33036825ee
+		sourceLineageTag: Discount
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		sourceProviderType: decimal(19, 4)
+		lineageTag: eec9e34e-44de-4f9a-ab90-61064bb8953d
+		sourceLineageTag: Profit
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'returned _2_'
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 207184be-e956-44b2-87ac-e19bc62caa6e
+		sourceLineageTag: returned _2_
+		summarizeBy: none
+		sourceColumn: returned _2_
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales2 = entity
+		mode: directLake
+		source
+			entityName: sales2
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

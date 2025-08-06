@@ -1,0 +1,273 @@
+table All_Sales
+	lineageTag: a1e5fde7-79ad-4a7f-8416-7e96b954d22a
+	sourceLineageTag: [dbo].[All_Sales]
+
+	measure 'Total Sales' = ```
+			SUM(All_Sales[Sales])
+			
+			```
+		lineageTag: d26d4bf1-55d2-49bb-8a87-3e364ea14477
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Returns' = ```
+			
+			CALCULATE(
+			    SUM(All_Sales[Sales]),
+			    All_Sales[Returned] = "Yes"
+			)
+			
+			```
+		lineageTag: 24a1d0b4-c2a8-44d0-9507-7bbfad516143
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure ShipDateDate
+		lineageTag: 4ca0df60-16de-4350-a8d3-870a7a68f4b3
+
+		changedProperty = Name
+
+	column RowID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 263a1cff-a13e-428e-81ac-7fdc7f566ecb
+		sourceLineageTag: RowID
+		summarizeBy: count
+		sourceColumn: RowID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6c38b9db-ef87-42fa-8554-c921fe9dc5c8
+		sourceLineageTag: OrderID
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Short Date
+		sourceProviderType: date
+		lineageTag: 7bc9fe5b-2680-4eec-b4bb-020fd814088e
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		changedProperty = FormatString
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ShipDate
+		dataType: dateTime
+		formatString: Short Date
+		sourceProviderType: date
+		lineageTag: ef3d2611-28ef-4691-80e2-373cb8cd2f6a
+		sourceLineageTag: ShipDate
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		changedProperty = FormatString
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ShipMode
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b5fa3b1f-264c-499d-98e3-18d1b0664c2b
+		sourceLineageTag: ShipMode
+		summarizeBy: none
+		sourceColumn: ShipMode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3a6fe5a0-3012-43ee-ae43-9ac5c553c490
+		sourceLineageTag: CustomerID
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f7c5b5ca-aae4-4436-aafd-cfcfb101da00
+		sourceLineageTag: CustomerName
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Segment
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2f146a58-3b6e-445a-93ce-1b6bf0892c1e
+		sourceLineageTag: Segment
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0326ef8e-588a-4571-9aab-08c18865d838
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b2bd0fc8-d9a2-4c22-b8be-10e9bb6f0ee7
+		sourceLineageTag: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fbc4ed77-b566-47f5-8808-eaf3e5c7654b
+		sourceLineageTag: State
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostalCode
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 39cbfaee-0a45-4ef8-a56e-0ba9fee7b2cc
+		sourceLineageTag: PostalCode
+		summarizeBy: count
+		sourceColumn: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c08b703f-aa6c-4d4d-a02a-0bd6657db328
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0e19cd26-0585-47b7-bf6d-21973f1a628b
+		sourceLineageTag: ProductID
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 858d50c7-94b6-4852-a205-317fd500b4c1
+		sourceLineageTag: Category
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubCategory
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a8ed5ceb-db99-4c9e-bd07-fb7fb896a598
+		sourceLineageTag: SubCategory
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 26cbb6c8-f2fc-48f3-8d50-e2dbcdecec1e
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: double
+		sourceProviderType: float
+		lineageTag: a649aea8-3fd6-455c-9834-75cade85bd40
+		sourceLineageTag: Sales
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6821195e-b9e6-4bf8-bb04-3f3878f84278
+		sourceLineageTag: Quantity
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: double
+		sourceProviderType: float
+		lineageTag: 6530d047-ea4b-4503-baaa-55dc20e8ec64
+		sourceLineageTag: Profit
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Returned
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 85a2dacc-861b-40bf-949f-3f2567366a4f
+		sourceLineageTag: Returned
+		summarizeBy: none
+		sourceColumn: Returned
+
+		annotation SummarizationSetBy = Automatic
+
+	partition All_Sales = entity
+		mode: directLake
+		source
+			entityName: All_Sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

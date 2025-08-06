@@ -1,0 +1,32 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "SupportCases_DF",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "SupportCases": {
+      "queryId": "c55d5b8d-b16e-4809-8f3b-c913c73be780",
+      "queryName": "SupportCases",
+      "loadEnabled": false
+    },
+    "DefaultDestination": {
+      "queryId": "6a68fec5-19f7-4400-98db-ef893b5d5901",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "PowerPlatformDataflows",
+      "kind": "PowerPlatformDataflows",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"3fbd159f-8224-4241-aa1b-2e773f902daa\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"0958458d-82e0-4ff6-a354-5e535d77b040\",\"DatasourceId\":\"8fd24fd0-f60d-4394-b03a-29cd388ba40a\"}"
+    }
+  ]
+}
