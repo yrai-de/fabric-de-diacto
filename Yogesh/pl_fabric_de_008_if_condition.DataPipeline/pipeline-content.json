@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "If Condition1",
+        "type": "IfCondition",
+        "dependsOn": [],
+        "typeProperties": {
+          "expression": {
+            "value": "@less(100,10)",
+            "type": "Expression"
+          },
+          "ifFalseActivities": [
+            {
+              "name": "Wait2",
+              "type": "Wait",
+              "dependsOn": [],
+              "typeProperties": {
+                "waitTimeInSeconds": 1
+              }
+            }
+          ],
+          "ifTrueActivities": [
+            {
+              "name": "Wait1",
+              "type": "Wait",
+              "dependsOn": [],
+              "typeProperties": {
+                "waitTimeInSeconds": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
