@@ -380,6 +380,21 @@ table SupportCases
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Response Minutes' = ```
+			
+			DATEDIFF(
+			    'SupportCases'[CreatedOn],
+			    'SupportCases'[FirstResponseBy],
+			    MINUTE
+			)
+			
+			```
+		formatString: 0
+		lineageTag: b736e8c4-de79-4ad8-b4c0-7e61cc3a774a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
 	hierarchy 'Quarter Hierarchy'
 		lineageTag: 7e29be1f-2baf-4c10-a887-7c7cea77f82d
 

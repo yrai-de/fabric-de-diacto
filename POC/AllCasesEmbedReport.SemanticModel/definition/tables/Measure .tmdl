@@ -419,12 +419,14 @@ table 'Measure '
 		formatString: 0
 		lineageTag: 370ef809-a263-4dbb-9c9c-64941581fa00
 
-	measure 'New Cases - This Week' =
+	measure 'New Cases - This Week' = ```
 			
 			CALCULATE(
 			    COUNTROWS('SupportCases'),
 			    'SupportCases'[CreatedOn] >= TODAY() - 6
 			)
+			
+			```
 		formatString: 0
 		lineageTag: e0eec457-6d48-42f5-96ab-8ea4ee2e3566
 
@@ -653,6 +655,168 @@ table 'Measure '
 			    USERELATIONSHIP('Date'[Date], 'SupportCases'[CreatedOn])
 			)
 		lineageTag: 64699b5e-b7a5-4002-abd2-5cfca6ea5f14
+
+	measure 'Within SLA Count' = ```
+			
+			VAR SLA_Table =
+			    ADDCOLUMNS(
+			        FILTER(
+			            'SupportCases',
+			            NOT ISBLANK('SupportCases'[FirstResponseBy]) &&
+			            NOT ISBLANK('SupportCases'[CreatedOn])
+			        ),
+			        "SLALimit",
+			            SWITCH(
+			                TRUE(),
+			                'SupportCases'[Severity] = "Sev A (Critical)", 15,
+			                'SupportCases'[Severity] = "Sev B (High)", 120,
+			                'SupportCases'[Severity] = "Sev C (Non-Critical)", 180
+			            ),
+			        "ResponseMinutes",
+			            DATEDIFF(
+			                'SupportCases'[CreatedOn],
+			                'SupportCases'[FirstResponseBy],
+			                MINUTE
+			            )
+			    )
+			RETURN
+			COUNTROWS(
+			    FILTER(
+			        SLA_Table,
+			        [ResponseMinutes] <= [SLALimit]
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ad4f81de-5ea8-43e6-9611-10adfd5cf0fe
+
+	measure 'Out of SLA Count' = ```
+			
+			VAR SLA_Table =
+			    ADDCOLUMNS(
+			        FILTER(
+			            'SupportCases',
+			            NOT ISBLANK('SupportCases'[FirstResponseBy]) &&
+			            NOT ISBLANK('SupportCases'[CreatedOn])
+			        ),
+			        "SLALimit",
+			            SWITCH(
+			                TRUE(),
+			                'SupportCases'[Severity] = "Sev A (Critical)", 15,
+			                'SupportCases'[Severity] = "Sev B (High)", 120,
+			                'SupportCases'[Severity] = "Sev C (Non-Critical)", 180
+			            ),
+			        "ResponseMinutes",
+			            DATEDIFF(
+			                'SupportCases'[CreatedOn],
+			                'SupportCases'[FirstResponseBy],
+			                MINUTE
+			            )
+			    )
+			RETURN
+			COUNTROWS(
+			    FILTER(
+			        SLA_Table,
+			        [ResponseMinutes] > [SLALimit]
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: f2e5eff3-7710-4547-9368-6657687d0dda
+
+	measure 'New Cases - Last 30 Days' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[CreatedOn] >= TODAY() - 29
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ac6e1078-0f1e-4f19-9cb7-4e6d5b9ca977
+
+	measure 'New Cases - Prior 30 Days' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[CreatedOn] >= TODAY() - 59 &&
+			    'SupportCases'[CreatedOn] <= TODAY() - 30
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 9b43c0f3-75e6-4bdd-9fb7-99159bf4ac88
+
+	measure 'New Cases Trend % (30 Days)' = ```
+			
+			VAR Curr = [New Cases - Last 30 Days]
+			VAR Prev = [New Cases - Prior 30 Days]
+			RETURN
+			DIVIDE(Curr - Prev, Prev)
+			
+			```
+		lineageTag: 28215bd1-a44f-4b76-b12d-b5d834500408
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'New Cases Trend Display (30 Days)' = ```
+			
+			VAR Curr = [New Cases - Last 30 Days]
+			VAR Change = [New Cases Trend % (30 Days)]
+			VAR Arrow = IF(Change >= 0, "▲", "▼")
+			RETURN
+			"New Cases (30 Days): " & Curr & " (" & FORMAT(Change, "0%") & ") " & Arrow
+			
+			```
+		lineageTag: 5b123087-5c39-4a9c-8ece-933d345ee028
+
+	measure 'Resolved Cases - Last 30 Days' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[DeactivatedOn] >= TODAY() - 29
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 7574adac-e16d-47e8-a5cf-be6ed2d74bf1
+
+	measure 'Resolved Cases - Prior 30 Days' = ```
+			
+			CALCULATE(
+			    COUNTROWS('SupportCases'),
+			    'SupportCases'[DeactivatedOn] >= TODAY() - 59 &&
+			    'SupportCases'[DeactivatedOn] <= TODAY() - 30
+			)
+			
+			```
+		formatString: 0
+		lineageTag: dbb443ed-a6fd-480b-a46d-bbe752d233cc
+
+	measure 'Resolved Cases Trend % (30 Days)' = ```
+			
+			VAR Curr = [Resolved Cases - Last 30 Days]
+			VAR Prev = [Resolved Cases - Prior 30 Days]
+			RETURN
+			DIVIDE(Curr - Prev, Prev)
+			
+			```
+		lineageTag: 59d2d21d-0676-41f5-9cce-bcf178ef009a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Resolved Cases Trend Display (30 Days)' = ```
+			
+			VAR Curr = [Resolved Cases - Last 30 Days]
+			VAR Change = [Resolved Cases Trend % (30 Days)]
+			VAR Arrow = IF(Change >= 0, "▲", "▼")
+			RETURN
+			"Resolved Cases (30 Days): " & Curr & " (" & FORMAT(Change, "0%") & ") " & Arrow
+			
+			```
+		lineageTag: 0c2ca492-a056-4f47-9810-2e379e0e52b2
 
 	column Column
 		formatString: 0
